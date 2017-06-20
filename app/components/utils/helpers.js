@@ -3,6 +3,10 @@ var axios = require("axios");
 //api Key
 var apiKey = "a1699c1cddf743888c4fca0bbf277bbc";
 
+
+// NOTE: This app only works when CORS (Google Chrome Extension) is installed. This bypasses the "Allow-Control-Allow-Origin" Problem that seems
+// to arise. Here: https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
+
 //helper functions
 var helper = {
 

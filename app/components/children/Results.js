@@ -16,7 +16,7 @@ let Results = React.createClass({
             )
         }
 
-        var newArray = this.props.data.docs.slice(0,5);
+        var newArray = this.props.data.docs.slice(0,10);
 
         const articles = newArray.map((article) =>
             <div className="panel panel-default">
@@ -25,13 +25,15 @@ let Results = React.createClass({
                 </div>
                 <div className="panel-body text-center">
                     <p>{article.snippet}</p>
+                    <h6>Published: {article.pub_date}</h6>
+                    <p style={{color: "cadetblue"}}>{article.byline.original}</p>
                     <p><a href={article.web_url}>{article.web_url}</a></p>
                     <button
                         className="btn btn-default"
                         onClick={this.saveArticle}
                         data-header={article.headline.main}
                         data-url={article.web_url}
-                    >Save Article</button>
+                    >Save this Article</button>
                 </div>
             </div>
         );

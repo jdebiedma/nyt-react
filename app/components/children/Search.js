@@ -37,7 +37,7 @@ var Search = React.createClass({
             endYear: this.state.endYear
         });
         this.setState({
-            query: "",
+            query: this.state.query,
             startYear: "2010",
             endYear: "2017"
         });
