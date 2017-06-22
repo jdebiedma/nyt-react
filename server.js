@@ -21,8 +21,20 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("./public"));
 
 
+var databaseUri = "mongodb://localhost/nytreact";
+
+if (process.env.MONGODB_URI) {
+
+    mongoose.connect(process.env.MONGODB_URI);
+
+} else {
+
+    mongoose.connect(databaseUri);
+}
+
+
 // MongoDB Configuration configuration (Change this URL to your own DB)
-mongoose.connect("mongodb://localhost/nytreact");
+
 var db = mongoose.connection;
 
 var Article = require("./models/Article");
