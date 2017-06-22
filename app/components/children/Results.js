@@ -1,6 +1,24 @@
 let React = require('react');
 
+var helpers = require("../utils/helpers");
+
 let Results = React.createClass({
+
+    saveArticle: function (event) {
+
+        var url = event.target.dataset.url;
+        var title = event.target.dataset.title;
+        var author = event.target.dataset.author;
+
+        helpers.postArticle(url, title, author).then(function () {
+            console.log("Article Saved");
+
+            //once article is saved, get list of saved articles
+
+        })
+    },
+
+
     render: function () {
 
         if(this.props.data === ""){
@@ -31,8 +49,9 @@ let Results = React.createClass({
                     <button
                         className="btn btn-default"
                         onClick={this.saveArticle}
-                        data-header={article.headline.main}
+                        data-title={article.headline.main}
                         data-url={article.web_url}
+                        data-author={article.byline.original}
                     >Save this Article</button>
                 </div>
             </div>

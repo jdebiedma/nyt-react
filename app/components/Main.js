@@ -12,21 +12,37 @@ var Main = React.createClass({
   // Here we set a generic state associated with the number of clicks
   // Note how we added in this history state variable
   getInitialState: function() {
-    return { query: "", startYear: "", endYear: "", results: "", saved: [] };
+    return { query: "", startYear: "", endYear: "", results: "", saved_articles: [] };
   },
+
+    componentDidMount: function() {
+        helpers.fetchSaved().then(function(response) {
+            console.log(response);
+            if (response !== this.state.saved_articles) {
+                console.log("Saved", response.data);
+                this.setState({ saved_articles: response.data });
+            }
+        }.bind(this));
+    },
 
     componentDidUpdate: function() {
         helpers.runQuery(this.state.query, this.state.startYear, this.state.endYear).then(function(data) {
             if (data !== this.state.results) {
-                console.log("First article", data);
+
                 this.setState({ results: data });
             }
         }.bind(this));
     },
+
     setTerm: function(obj) {
         this.setState({query: obj.query});
         this.setState({startYear: obj.startYear});
         this.setState({endYear: obj.endYear});
+    },
+
+    showSaved: function() {
+
+
     },
 
   // Here we render the function
@@ -40,7 +56,7 @@ var Main = React.createClass({
 
              <Results data={this.state.results}/>
 
-            <Saved/>
+             <Saved data={this.state.saved_articles}/>
           </div>
 
           

@@ -28,14 +28,15 @@ var helper = {
         });
     },
 
-    getSavedArticles: function () {
+    fetchSaved: function () {
         return axios.get("/api");
     },
 
-    postArticle: function (url, title) {
+    postArticle: function (url, title, author) {
         return axios.post("/api", {
             url: url,
-            title: title
+            title: title,
+            author: author
         })
     }
 };

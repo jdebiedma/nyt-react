@@ -4,7 +4,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 
 // Require History Schema
-//var History = require("./models/History");
+var History = require("./models/Article");
 
 // Create Instance of Express
 var app = express();
@@ -25,6 +25,8 @@ app.use(express.static("./public"));
 mongoose.connect("mongodb://localhost/nytreact");
 var db = mongoose.connection;
 
+var Article = require("./models/Article");
+
 db.on("error", function(err) {
     console.log("Mongoose Error: ", err);
 });
@@ -40,7 +42,37 @@ app.get("/", function(req, res) {
 });
 
 
-// Rest of the API Calls and shit
+// Rest of the API Calls and such
+
+app.get("/api", function(req, res) {
+
+    Article.find({}).limit(5).exec(function (err, doc) {
+        if(err){
+            console.log(err);
+        }
+        else {
+            console.log("Results:", doc);
+            res.send(doc);
+        }
+    });
+});
+
+app.post("/api", function (req, res){
+
+   Article.create({
+        url: req.body.url,
+        title: req.body.title,
+        author: req.body.author
+   }, function (err) {
+       if (err) {
+           console.log(err);
+       }
+       else {
+           res.send("Article Saved!");
+           console.log("Article: Saved!");
+       }
+   });
+});
 
 
 
