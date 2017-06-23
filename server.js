@@ -25,7 +25,7 @@ var databaseUri = "mongodb://localhost/nytreact";
 
 if (process.env.MONGODB_URI) {
 
-    mongoose.connect(process.env.MONGODB_URI);
+    mongoose.connect("mongodb://heroku_rgv34pb2:vm6uonn7a9idj5uvvmvpm1i352@ds135252.mlab.com:35252/heroku_rgv34pb2");
 
 } else {
 
